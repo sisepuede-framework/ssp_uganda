@@ -27,9 +27,7 @@ Install additional libraries (make sure to be inside ssp_uganda folder):
 pip install -r requirements.txt
 ```
 
-## File Structure
-
-# Repository Structure
+## Repository Structure
 
 **ssp_uganda/**
 - **LICENSE** — MIT License for the project.
