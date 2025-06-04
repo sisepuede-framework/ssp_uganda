@@ -1,5 +1,14 @@
 # SSP_Uganda
-This repository stores the notebooks to run the SSP model on Uganda's mitigation scenarios.
+
+This repository contains notebooks and supporting files used to run the
+**SISEPUEDE** model on Uganda's mitigation scenarios. All modeling resources
+reside in the `ssp_modeling` folder described below.
+
+**Note:**  
+This version of the repository reflects the state *prior to the NDC update*.  
+For the most up-to-date development, please refer to the new repository:  
+🔗 [ssp_uganda_ndc](https://github.com/sisepuede-framework/ssp_uganda_ndc)
+
 
 ## Get Started
 
@@ -21,23 +30,51 @@ Install the working version of the sisepuede package:
 pip install git+https://github.com/jcsyme/sisepuede.git@working_version
 ```
 
-Install additional libraries (make sure to be inside ssp_uganda folder):
+Install the cost benefits package:
+
+```bash
+pip install git+https://github.com/milocortes/costs_benefits_ssp.git@main
+```
+
+Install additional libraries:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Repository Structure
+## Project Structure
 
-**ssp_uganda/**
-- **LICENSE** — MIT License for the project.
-- **README.md** — Project overview and instructions.
-- **requirements.txt** — List of required Python packages.
-- **.gitignore** — Specifies files and folders to ignore in Git.
-- **ssp_modeling/** — Main directory containing simulation components:
-  - **config_files/** — Configuration files for model parameters and setups.
-  - **input_data/** — Raw or processed input data for simulations.
-  - **misc/** — Miscellaneous supporting scripts or data.
-  - **notebooks/** — Jupyter notebooks to run the simulation.
-  - **scenario_mapping/** — Excel files that map different simulation scenarios.
-  - **transformations/** — transformations and strategies files.
+The most relevant files are inside the `ssp_modeling` directory:
+
+- `config_files/` – YAML configuration files used by the notebooks.
+- `input_data/` – Raw CSVs for each scenario.
+- `notebooks/` – Jupyter notebooks that manage the modeling runs.
+- `ssp_run/` – Output folders created after executing a scenario.
+- `scenario_mapping/` – Spreadsheets with the mapping between SSP transformations and region-specific measures. This is where the scenarios and transformation intensities are defined.
+- `transformations/` – CSVs and YAML files describing the transformations applied by the model.
+- `output_postprocessing/` – R scripts used to rescale model results and
+    generate processed outputs.
+
+## Uganda Manager Workbooks
+
+Three notebooks drive the modeling process:
+
+- **`uganda_manager_wb_bau.ipynb`** – Runs the Business as Usual scenario using
+    `bau_config.yaml`.
+- **`uganda_manager_wb_asp.ipynb`** – Runs the ambition scenario defined in
+    `asp_config.yaml`.
+- **`uganda_manager_wb_bau_w_energy.ipynb`** – Runs a BaU case that also calls
+    the energy model with `bau_energy_config.yaml`.
+
+Each notebook loads the appropriate configuration file, prepares the input data
+frame, applies the transformations listed in the corresponding workbook, and
+produces a CSV in `ssp_run/<scenario>/` with the results.
+
+## Rescaling
+
+After running a scenario, the outputs can be rescaled to match the national
+inventory targets. Scripts under
+`output_postprocessing/scr/` (for example,
+`run_script_baseline_run_new_asp.r`) load the simulation results, apply the
+function defined in `rescale_function_baseline_mapping_timeref.r`, and overwrite
+the CSV in `ssp_run/<scenario>/` with calibrated values.
