@@ -46,9 +46,9 @@ dim(data_new)
 
 #convert from wide to long 
 library(data.table)
-#library(reshape2)
+library(reshape2)
 data_new <- data.table(data_new)
-data_new <- melt(data_new, id.vars = id_vars,
+data_new <- reshape2::melt(data_new, id.vars = id_vars,
                    measure.vars = mapping$ids,
              )
 data_new <- data.frame(data_new)
@@ -154,14 +154,6 @@ all <- rbind(all,others)
 #before making adjustment remove historic  
 all_historical <- subset(all,strategy=="Historical")
 all <- subset(all,strategy!="Historical")
-
-#adjust to the latest inventory 
-all$value <-ifelse(grepl("AG - Crops",all$ids)==TRUE,all$value*18.56/8.67,all$value)
-all$value <-ifelse(grepl("AG - Livestock",all$ids)==TRUE,all$value*20.51/20.24,all$value)
-all$value <-ifelse(grepl("IN - Industrial Processes",all$ids)==TRUE,all$value*0.383/2.3,all$value)
-all$value <-ifelse(grepl("LULUCF - Deforestation",all$ids)==TRUE,all$value*56.7/62.61,all$value)
-all$value <-ifelse(grepl("Waste - Solid Waste",all$ids)==TRUE,all$value*5.658/0.596,all$value)
-all$value <-ifelse(grepl("Waste - Wastewater Treatment",all$ids)==TRUE,all$value*2.56/7.62,all$value)
 
 #make power historical zero 
 all_historical[all_historical$CSC.Subsector=="EN - Electricity/Heat","value"]<-0

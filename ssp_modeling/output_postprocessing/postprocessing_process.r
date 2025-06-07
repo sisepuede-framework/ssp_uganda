@@ -1,11 +1,10 @@
-options(warn = -1)
 #################################################
 # Post processing process
 #################################################
 
 # load packages
 library(data.table)
-suppressWarnings()
+library(reshape2)
 
 rm(list=ls())
 

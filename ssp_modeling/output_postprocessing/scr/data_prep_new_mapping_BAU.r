@@ -46,9 +46,9 @@ dim(data_new)
 
 #convert from wide to long 
 library(data.table)
-#library(reshape2)
+library(reshape2)
 data_new <- data.table(data_new)
-data_new <- melt(data_new, id.vars = id_vars,
+data_new <- reshape2::melt(data_new, id.vars = id_vars,
                    measure.vars = mapping$ids,
              )
 data_new <- data.frame(data_new)
