@@ -51,7 +51,7 @@ te_all$Edgar_Class<-NULL
 
 #now run
 
-source("ssp_modeling/output_postprocessing/scr/rescale_function_baseline_mapping_timeref.r")
+source("ssp_modeling/output_postprocessing/scr/intertemporal_decomposition.r")
 z<-1
 rescale(z,rall,data_all,te_all,initial_conditions_id,dir.output,time_period_ref)
 
