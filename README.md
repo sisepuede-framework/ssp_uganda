@@ -70,11 +70,8 @@ Each notebook loads the appropriate configuration file, prepares the input data
 frame, applies the transformations listed in the corresponding workbook, and
 produces a CSV in `ssp_run/<scenario>/` with the results.
 
-## Rescaling
+## Intertemporal Decomposition
 
-After running a scenario, the outputs can be rescaled to match the national
-inventory targets. Scripts under
+After running a scenario, the outputs can be adjusted through intertemporal decomposition to align with national inventory targets. Scripts in
 `output_postprocessing/scr/` (for example,
-`run_script_baseline_run_new_asp.r`) load the simulation results, apply the
-function defined in `rescale_function_baseline_mapping_timeref.r`, and overwrite
-the CSV in `ssp_run/<scenario>/` with calibrated values.
+`run_script_baseline_run_new_asp.r`) load the simulation results, apply the procedure defined in `rescale_function_baseline_mapping_timeref.r`, and overwrite the CSV in `ssp_run/<scenario>/` with calibrated values.
