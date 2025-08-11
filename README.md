@@ -6,9 +6,7 @@ reside in the `ssp_modeling` folder described below.
 
 **Note:**  
 This version of the repository reflects the state *prior to the NDC update*.  
-For the most up-to-date development, please refer to the new repository:  
-🔗 [ssp_uganda_ndc](https://github.com/sisepuede-framework/ssp_uganda_ndc)
-
+We're currently working in the latest NDC version
 
 ## Get Started
 
